@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-> Schema package for table **users** (repo: $slug).
+> Schema package for table **users** (repo: `users`).
 
 ## Files
 ```
@@ -53,7 +53,7 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 | created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
 | updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
 | deleted_at | DATETIME(6) | YES | — |  |
-| actor_role | ENUM(''customer'',''admin'') | NO | '' |  |
+| actor_role | ENUM('customer','admin') | NO | '' |  |
 
 ## Relationships
 - No outgoing foreign keys.
@@ -61,23 +61,23 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 ```mermaid
 erDiagram
   USERS {
-    BIGINT id PK
-    BINARY(32) email_hash
-    VARCHAR(64) email_hash_key_version
-    VARCHAR(255) password_hash
-    VARCHAR(64) password_algo
-    VARCHAR(64) password_key_version
+    INT id PK
+    BLOB email_hash
+    VARCHAR email_hash_key_version
+    VARCHAR password_hash
+    VARCHAR password_algo
+    VARCHAR password_key_version
     BOOLEAN is_active
     BOOLEAN is_locked
     INT failed_logins
     BOOLEAN must_change_password
-    DATETIME(6) last_login_at
-    BINARY(32) last_login_ip_hash
-    VARCHAR(64) last_login_ip_key_version
-    DATETIME(6) created_at
-    DATETIME(6) updated_at
-    DATETIME(6) deleted_at
-    ENUM(''customer'',''admin'') actor_role
+    DATETIME last_login_at
+    BLOB last_login_ip_hash
+    VARCHAR last_login_ip_key_version
+    DATETIME created_at
+    DATETIME updated_at
+    DATETIME deleted_at
+    ENUM actor_role
   }
 ```
 
