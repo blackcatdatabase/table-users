@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
   created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
   deleted_at DATETIME(6) NULL,
-  actor_role ENUM(''customer'',''admin'') NOT NULL DEFAULT ''customer'',
+  actor_role ENUM('customer','admin') NOT NULL DEFAULT 'customer',
   INDEX idx_users_last_login_at (last_login_at),
   INDEX idx_users_is_active (is_active),
   INDEX idx_users_actor_role (actor_role),

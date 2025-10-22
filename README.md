@@ -55,7 +55,7 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 | created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
 | updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
 | deleted_at | DATETIME(6) | YES | — |  |
-| actor_role | ENUM('customer','admin') | NO | '' |  |
+| actor_role | ENUM('customer','admin') | NO | 'customer' |  |
 
 ## Relationships
 - No outgoing foreign keys.

@@ -22,4 +22,4 @@ User accounts and authentication attributes.
 | created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Creation timestamp (UTC). |  |
 | updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Update timestamp (UTC). |  |
 | deleted_at | DATETIME(6) | YES | — | Soft delete timestamp. |  |
-| actor_role | ENUM('customer','admin') | NO | ''customer'' | Role within application. | enum: customer, admin |
+| actor_role | ENUM('customer','admin') | NO | 'customer' | Role within application. | enum: customer, admin |
