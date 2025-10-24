@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\Users;
 /**
  * Bezpečný builder WHERE/ORDER/LIMIT.
  * - whitelist filtrů: [ 'id', 'email_hash', 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_hash', 'last_login_ip_key_version', 'created_at', 'updated_at', 'deleted_at', 'actor_role' ]
- * - whitelist pro LIKE hledání: [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version' ]
+ * - whitelist pro LIKE hledání: [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version', 'actor_role' ]
  */
 final class Criteria {
     /** @var array<string,mixed> */
@@ -61,7 +61,7 @@ final class Criteria {
 
         // fulltext/LIKE (přes whitelist)
         if ($this->search !== null) {
-            $searchCols = [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version' ];
+            $searchCols = [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version', 'actor_role' ];
             $likeParts = [];
             foreach ($searchCols as $i=>$c) {
                 if ($c === '') continue;
