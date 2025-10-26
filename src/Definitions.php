@@ -8,10 +8,10 @@ final class Definitions {
     public static function table(): string { return 'users'; }
     public static function contractView(): string { return 'vw_users'; }
     /** @return string[] */
-    public static function columns(): array { return [ 'id', 'email_hash', 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_hash', 'last_login_ip_key_version', 'created_at', 'updated_at', 'deleted_at', 'actor_role' ]; }
+    public static function columns(): array { return [ 'id', 'email_hash', 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_hash', 'last_login_ip_key_version', 'created_at', 'updated_at', 'version', 'deleted_at', 'actor_role' ]; }
     public static function pk(): string { return 'id'; }
 
-    // --- volitelná metadata (mohou být prázdná) ---
+    // --- volitelná metadata ---
     public static function softDeleteColumn(): ?string {
         $c = 'deleted_at'; return $c !== '' ? $c : null;
     }
@@ -19,14 +19,14 @@ final class Definitions {
         $c = 'updated_at'; return $c !== '' ? $c : null;
     }
     public static function versionColumn(): ?string {
-        $c = ''; return $c !== '' ? $c : null; // pro optimistic locking
+        $c = 'version'; return $c !== '' ? $c : null;
     }
     /** např. "created_at DESC, id DESC" */
     public static function defaultOrder(): ?string {
         $c = 'created_at DESC, id DESC'; return $c !== '' ? $c : null;
     }
-    /** @return array<int,array<int,string>> seznam unikátních klíčů (sloupcových kombinací) */
-    public static function uniqueKeys(): array { return []; }
+    /** @return array<int,array<int,string>> seznam unikátních klíčů */
+    public static function uniqueKeys(): array { return [ [ 'email_hash' ] ]; }
     /** @return string[] JSON sloupce kvůli castům/operacím */
     public static function jsonColumns(): array { return []; }
 
@@ -36,4 +36,35 @@ final class Definitions {
         if ($set === null) { $set = array_fill_keys(self::columns(), true); }
         return isset($set[$col]);
     }
+
+    /**
+     * identity | uuid | natural | composite
+     */
+    public static function pkStrategy(): string {
+        $c = 'identity';
+        return $c !== '' ? $c : 'natural';
+    }
+
+    public static function isIdentityPk(): bool {
+        return self::pkStrategy() === 'identity';
+    }
+
+    /** True, pokud je tabulka vhodná pro testy row-locků (bez kaskád/FK, malá šíře řádku apod.). */
+    public static function isRowLockSafe(): bool {
+        return false;
+    }
+
+    /** Pohodlný alias – má tabulka verzi pro optimistic locking? */
+    public static function supportsOptimisticLocking(): bool {
+        return self::versionColumn() !== null;
+    }
+
+    /** Pro JSON casty/operace – rychlý test bez vytváření setu. */
+    public static function hasJsonColumn(string $col): bool {
+        static $set = null;
+        if ($set === null) { $set = array_fill_keys(self::jsonColumns(), true); }
+        return isset($set[$col]);
+    }
+
+    public static function isSoftDeleteEnabled(): bool { return self::softDeleteColumn() !== null; }
 }

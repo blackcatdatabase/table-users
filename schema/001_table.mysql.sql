@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-mysql.psd1 (map@mtime:2025-10-24T09:13:35Z)
+-- Auto-generated from schema-map-mysql.psd1 (map@38d5403)
 -- engine: mysql
 -- table:  users
 CREATE TABLE IF NOT EXISTS users (
@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
   last_login_ip_key_version VARCHAR(64) NULL,
   created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  version INT UNSIGNED NOT NULL DEFAULT 0,
   deleted_at DATETIME(6) NULL,
   actor_role ENUM('customer','admin') NOT NULL DEFAULT 'customer',
   INDEX idx_users_last_login_at (last_login_at),

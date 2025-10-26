@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@mtime:2025-10-24T09:46:38Z)
+-- Auto-generated from schema-map-postgres.psd1 (map@38d5403)
 -- engine: postgres
 -- table:  users
 CREATE TABLE IF NOT EXISTS users (
@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS users (
   last_login_ip_key_version VARCHAR(64) NULL,
   created_at TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   updated_at TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  version INTEGER NOT NULL DEFAULT 0,
+  CONSTRAINT chk_users_version CHECK (version >= 0),
   deleted_at TIMESTAMPTZ(6) NULL,
   actor_role TEXT NOT NULL DEFAULT 'customer',
   CONSTRAINT chk_users_actor_role CHECK (actor_role IN ('customer','admin'))
