@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@38d5403)
+-- Auto-generated from schema-map-postgres.psd1 (map@c5e4097)
 -- engine: postgres
 -- table:  users
 CREATE INDEX IF NOT EXISTS idx_users_last_login_at ON users (last_login_at);

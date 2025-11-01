@@ -1,4 +1,4 @@
--- Auto-generated from schema-views-postgres.psd1 (map@38d5403)
+-- Auto-generated from schema-views-postgres.psd1 (map@c5e4097)
 -- engine: postgres
 -- table:  users
 -- Contract view for [users]
@@ -19,6 +19,7 @@ SELECT
   last_login_ip_key_version,
   created_at,
   updated_at,
+  version,
   deleted_at,
   actor_role
 FROM users;
