@@ -23,6 +23,5 @@ CREATE TABLE IF NOT EXISTS users (
   INDEX idx_users_last_login_at (last_login_at),
   INDEX idx_users_is_active (is_active),
   INDEX idx_users_actor_role (actor_role),
-  INDEX idx_users_last_login_ip_hash (last_login_ip_hash),
-  INDEX idx_users_email_hash (email_hash)
+  INDEX idx_users_last_login_ip_hash (last_login_ip_hash)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
