@@ -1,4 +1,4 @@
--- Auto-generated from schema-views-postgres.psd1 (map@9d3471b)
+-- Auto-generated from schema-views-postgres.psd1 (map@62c9c93)
 -- engine: postgres
 -- table:  users
 -- Contract view for [users]
@@ -24,7 +24,7 @@ SELECT
   actor_role
 FROM users;
 
--- Auto-generated from schema-views-feature-postgres.psd1 (map@mtime:2025-11-20T14:33:32Z)
+-- Auto-generated from schema-views-feature-postgres.psd1 (map@62c9c93)
 -- engine: postgres
 -- table:  users_rbac_access_summary
 -- Per-user summary: roles + effective permissions

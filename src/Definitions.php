@@ -1,0 +1,134 @@
+<?php
+declare(strict_types=1);
+
+namespace BlackCat\Database\Packages\Users;
+
+final class Definitions {
+    // --- core metadata ---
+    public static function table(): string { return 'users'; }
+    public static function contractView(): string { return 'vw_users'; }
+    /** @return string[] */
+    public static function columns(): array { return [ 'id', 'email_hash', 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_hash', 'last_login_ip_key_version', 'created_at', 'updated_at', 'version', 'deleted_at', 'actor_role' ]; }
+
+    /** @var array<string,array<int,string>> */
+    public const STATUS_TRANSITIONS = [];
+
+    /**
+     * Table primary key(s). Supports single and composite PK.
+     * id may be "id" or "col1, col2".
+     * @return string[]
+     */
+    public static function pkColumns(): array {
+        $raw = 'id';
+        $parts = array_values(array_filter(array_map(
+            static fn($p) => trim($p, " \t\n\r\0\x0B`\""),
+            preg_split('/\s*,\s*/', $raw ?? '')
+        )));
+        if ($parts) {
+            return $parts;
+        }
+        $rawClean = trim((string)$raw, " \t\n\r\0\x0B`\"");
+        if ($rawClean === '') {
+            throw new \InvalidArgumentException('Definitions::pkColumns(): token id must not be empty.');
+        }
+        return [$rawClean];
+    }
+
+    /**
+     * Allowed state transitions (e.g., 'draft' => ['ready'], 'ready' => ['sent','canceled']).
+     * @return array<string, string[]>
+     */
+    public static function statusTransitions(): array {
+        return self::STATUS_TRANSITIONS;
+    }
+
+    /** Backward compatibility: the first column from the PK. */
+    public static function pk(): string { return self::pkColumns()[0]; }
+
+    // --- optional metadata ---
+    public static function softDeleteColumn(): ?string {
+        $c = 'deleted_at'; return $c !== '' ? $c : null;
+    }
+    public static function updatedAtColumn(): ?string {
+        $c = 'updated_at'; return $c !== '' ? $c : null;
+    }
+    public static function versionColumn(): ?string {
+        $c = 'version'; return $c !== '' ? $c : null;
+    }
+    /** e.g. "created_at DESC, id DESC" */
+    public static function defaultOrder(): ?string {
+        $c = 'created_at DESC, id DESC'; return $c !== '' ? $c : null;
+    }
+
+    /** @return array<int,array<int,string>> list of unique keys */
+    public static function uniqueKeys(): array { return [ [ 'email_hash' ], [ 'id' ] ]; }
+
+    /** @return string[] JSON columns for casts/operations */
+    public static function jsonColumns(): array { return []; }
+
+    /** @return string[] List of numeric columns (generator heuristic; no runtime DB queries). */
+    public static function intColumns(): array { return [ 'id', 'failed_logins', 'version' ]; }
+
+    /** @return array<string,string> alias => column mapping (for input normalization) */
+    public static function paramAliases(): array { return []; }
+
+    /** Repository hint: is the version column actually numeric? (no information_schema needed) */
+    public static function versionIsNumeric(): bool
+    {
+        $v = self::versionColumn();
+        return $v !== null && in_array($v, self::intColumns(), true);
+    }
+
+    // --- helpers ---
+    public static function hasColumn(string $col): bool {
+        static $set = null;
+        if ($set === null) { $set = array_fill_keys(self::columns(), true); }
+        return isset($set[$col]);
+    }
+
+    /**
+     * identity | uuid | natural | composite
+     */
+    public static function pkStrategy(): string {
+        $c = 'identity';
+        return $c !== '' ? $c : 'natural';
+    }
+
+    public static function isIdentityPk(): bool {
+        return self::pkStrategy() === 'identity';
+    }
+
+    /** True when the table is suitable for row-lock tests (no cascading FK, small row width, etc.). */
+    public static function isRowLockSafe(): bool {
+        return true;
+    }
+
+    /** Convenience alias - does the table have a version column for optimistic locking? */
+    public static function supportsOptimisticLocking(): bool {
+        return self::versionColumn() !== null;
+    }
+
+    /** For JSON casts/operations - fast test without building a set. */
+    public static function hasJsonColumn(string $col): bool {
+        static $set = null;
+        if ($set === null) { $set = array_fill_keys(self::jsonColumns(), true); }
+        return isset($set[$col]);
+    }
+
+    public static function isSoftDeleteEnabled(): bool { return self::softDeleteColumn() !== null; }
+
+    /** @return string[] Columns containing PII for log/telemetry masking (module-specific). */
+    public static function piiColumns(): array { return [ 'email_hash', 'password_hash' ]; }
+
+    // --- derived "HAS_*" flags as methods (instead of constants calling functions) ---
+    public static function hasTenant(): bool {
+        return in_array('tenant_id', self::columns(), true);
+    }
+    public static function hasDeletedAt(): bool {
+        return self::softDeleteColumn() !== null;
+    }
+    public static function hasUuid(): bool {
+        $cols = self::columns();
+        return in_array('uuid', $cols, true) || in_array('uuid_bin', $cols, true);
+    }
+}
