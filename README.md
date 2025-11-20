@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-<!-- Auto-generated from schema-map.psd1 @ 6cefe8e (2025-10-22T20:27:41+02:00) -->
+<!-- Auto-generated from schema-map-postgres.psd1 @ 62c9c93 (2025-11-20T21:38:11+01:00) -->
 
 > Schema package for table **users** (repo: `users`).
 
@@ -39,23 +39,24 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 ## Columns
 | Column | Type | Null | Default | Extra |
 |-------:|:-----|:----:|:--------|:------|
-| id | BIGINT UNSIGNED | — | — | AUTO_INCREMENT, PK |
-| email_hash | BINARY(32) | YES | — |  |
+| id | BIGINT | — | AS | PK |
+| email_hash | BYTEA | YES | — |  |
 | email_hash_key_version | VARCHAR(64) | YES | — |  |
 | password_hash | VARCHAR(255) | NO | — |  |
 | password_algo | VARCHAR(64) | YES | — |  |
 | password_key_version | VARCHAR(64) | YES | — |  |
-| is_active | BOOLEAN | NO | 0 |  |
-| is_locked | BOOLEAN | NO | 0 |  |
-| failed_logins | INT | NO | 0 |  |
-| must_change_password | BOOLEAN | NO | 0 |  |
-| last_login_at | DATETIME(6) | YES | — |  |
-| last_login_ip_hash | BINARY(32) | YES | — |  |
+| is_active | BOOLEAN | NO | FALSE |  |
+| is_locked | BOOLEAN | NO | FALSE |  |
+| failed_logins | INTEGER | NO | 0 |  |
+| must_change_password | BOOLEAN | NO | FALSE |  |
+| last_login_at | TIMESTAMPTZ(6) | YES | — |  |
+| last_login_ip_hash | BYTEA | YES | — |  |
 | last_login_ip_key_version | VARCHAR(64) | YES | — |  |
-| created_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
-| updated_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
-| deleted_at | DATETIME(6) | YES | — |  |
-| actor_role | ENUM('customer','admin') | NO | 'customer' |  |
+| created_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) |  |
+| updated_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) |  |
+| version | INTEGER | NO | 0 |  |
+| deleted_at | TIMESTAMPTZ(6) | YES | — |  |
+| actor_role | TEXT | NO | 'customer' |  |
 
 ## Relationships
 - No outgoing foreign keys.
@@ -64,27 +65,28 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 erDiagram
   USERS {
     INT id PK
-    BLOB email_hash
+    BYTEA email_hash
     VARCHAR email_hash_key_version
     VARCHAR password_hash
     VARCHAR password_algo
     VARCHAR password_key_version
     BOOLEAN is_active
     BOOLEAN is_locked
-    INT failed_logins
+    INTEGER failed_logins
     BOOLEAN must_change_password
-    DATETIME last_login_at
-    BLOB last_login_ip_hash
+    TIMESTAMPTZ last_login_at
+    BYTEA last_login_ip_hash
     VARCHAR last_login_ip_key_version
-    DATETIME created_at
-    DATETIME updated_at
-    DATETIME deleted_at
-    ENUM actor_role
+    TIMESTAMPTZ created_at
+    TIMESTAMPTZ updated_at
+    INTEGER version
+    TIMESTAMPTZ deleted_at
+    VARCHAR actor_role
   }
 ```
 
 ## Indexes
-- 1 deferred index statement(s) in schema/020_indexes.sql.
+- 5 deferred index statement(s) in schema/020_indexes.sql.
 
 ## Notes
 - Generated from the umbrella repository **blackcat-database** using `scripts/schema-map.psd1`.
