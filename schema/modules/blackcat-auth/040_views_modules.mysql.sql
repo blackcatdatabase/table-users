@@ -1,6 +1,7 @@
--- Auto-generated from feature-modules-mysql.psd1 (map@mtime:2025-11-26T18:45:53Z)
+-- Auto-generated from feature-modules-mysql.yaml (map@94ebe6c)
 -- engine: mysql
 -- table:  rbac_user_roles_access_summary
+
 CREATE OR REPLACE ALGORITHM=TEMPTABLE SQL SECURITY INVOKER VIEW vw_rbac_user_roles_access_summary AS
 SELECT
   u.id AS user_id,

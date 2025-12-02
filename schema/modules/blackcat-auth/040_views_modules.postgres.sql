@@ -1,6 +1,7 @@
--- Auto-generated from feature-modules-postgres.psd1 (map@mtime:2025-11-27T13:56:21Z)
+-- Auto-generated from feature-modules-postgres.yaml (map@94ebe6c)
 -- engine: postgres
 -- table:  rbac_user_roles_access_summary
+
 CREATE OR REPLACE VIEW vw_rbac_user_roles_access_summary AS
 SELECT
   u.id AS user_id,
