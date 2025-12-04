@@ -38,7 +38,7 @@ final class Criteria extends BaseCriteria
     /** Columns used for full-text LIKE/ILIKE searches. */
     protected function searchable(): array
     {
-        return [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version' ];
+        return [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version', 'actor_role' ];
     }
 
 /** Columns allowed in ORDER BY (falls back to filterable() when empty). */
