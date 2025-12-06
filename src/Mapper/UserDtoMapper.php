@@ -17,7 +17,7 @@ use BlackCat\Database\Support\DtoHydrator;
 final class UserDtoMapper
 {
     /** @var array<string,string> Column -> DTO property */
-    private const COL_TO_PROP = [ 'email_hash' => 'emailHash', 'email_hash_key_version' => 'emailHashKeyVersion', 'password_hash' => 'passwordHash', 'password_algo' => 'passwordAlgo', 'password_key_version' => 'passwordKeyVersion', 'is_active' => 'isActive', 'is_locked' => 'isLocked', 'failed_logins' => 'failedLogins', 'must_change_password' => 'mustChangePassword', 'last_login_at' => 'lastLoginAt', 'last_login_ip_hash' => 'lastLoginIpHash', 'last_login_ip_key_version' => 'lastLoginIpKeyVersion', 'created_at' => 'createdAt', 'updated_at' => 'updatedAt', 'deleted_at' => 'deletedAt', 'actor_role' => 'actorRole' ];
+    private const COL_TO_PROP = [ 'id' => 'id', 'email_hash' => 'emailHash', 'email_hash_key_version' => 'emailHashKeyVersion', 'password_hash' => 'passwordHash', 'password_algo' => 'passwordAlgo', 'password_key_version' => 'passwordKeyVersion', 'is_active' => 'isActive', 'is_locked' => 'isLocked', 'failed_logins' => 'failedLogins', 'must_change_password' => 'mustChangePassword', 'last_login_at' => 'lastLoginAt', 'last_login_ip_hash' => 'lastLoginIpHash', 'last_login_ip_key_version' => 'lastLoginIpKeyVersion', 'created_at' => 'createdAt', 'updated_at' => 'updatedAt', 'version' => 'version', 'deleted_at' => 'deletedAt', 'actor_role' => 'actorRole' ];
 
     /** @var string[] */
     private const BOOL_COLS   = [ 'is_active', 'is_locked', 'must_change_password' ];
@@ -39,13 +39,8 @@ final class UserDtoMapper
 
     private static function tz(): DateTimeZone
     {
-        if (self::$tzObj instanceof DateTimeZone) {
-            return self::$tzObj;
-        }
-        try {
+        if (!(self::$tzObj instanceof DateTimeZone)) {
             self::$tzObj = new DateTimeZone(self::TZ);
-        } catch (\Throwable) {
-            self::$tzObj = new DateTimeZone('UTC');
         }
         return self::$tzObj;
     }

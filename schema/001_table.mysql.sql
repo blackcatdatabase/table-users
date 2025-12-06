@@ -1,6 +1,7 @@
--- Auto-generated from schema-map-mysql.psd1 (map@62c9c93)
+-- Auto-generated from schema-map-mysql.yaml (map@sha1:5E62933580349BE7C623D119AC9D1301A62F03EF)
 -- engine: mysql
 -- table:  users
+
 CREATE TABLE IF NOT EXISTS users (
   id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   email_hash BINARY(32) NULL,
@@ -23,5 +24,6 @@ CREATE TABLE IF NOT EXISTS users (
   INDEX idx_users_last_login_at (last_login_at),
   INDEX idx_users_is_active (is_active),
   INDEX idx_users_actor_role (actor_role),
-  INDEX idx_users_last_login_ip_hash (last_login_ip_hash)
+  INDEX idx_users_last_login_ip_hash (last_login_ip_hash),
+  UNIQUE KEY ux_users_email_hash (email_hash)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
