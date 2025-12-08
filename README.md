@@ -163,8 +163,8 @@ _No engine differences detected._
 - `actor_role` – default=customer, enum
 - `created_at` – default=CURRENT_TIMESTAMP(6)
 - `failed_logins` – default=0
-- `is_active` – default=FALSE
-- `is_locked` – default=FALSE
+- `is_active` – default=0
+- `is_locked` – default=0
 
 ## Schema Files
 | File | Engine |
