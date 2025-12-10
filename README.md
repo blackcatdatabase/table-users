@@ -19,7 +19,7 @@
 | What | Link | Notes |
 | --- | --- | --- |
 | Schema map | [schema-map-postgres.yaml](https://github.com/blackcatacademy/blackcat-database/blob/main/scripts/schema/schema-map-postgres.yaml) | Source for table metadata |
-| Pkg folder | [packages\users](https://github.com/blackcatacademy/blackcat-database/blob/main/packages\users) | Repo location |
+| Pkg folder | [packages\users](https://github.com/blackcatacademy/blackcat-database/blob/main/packages/users) | Repo location |
 | Definitions | [docs/definitions.md](docs/definitions.md) | Column/index/FK docs |
 | Engine differences | [docs/definitions.md#engine-differences](docs/definitions.md#engine-differences) | Drift section in definitions |
 | Changelog | [CHANGELOG.md](CHANGELOG.md) | Recent changes |
@@ -160,11 +160,11 @@ graph LR
 _No engine differences detected._
 
 ## Constraints Snapshot
-- `actor_role` – default=customer, enum
 - `created_at` – default=CURRENT_TIMESTAMP(6)
-- `failed_logins` – default=0
-- `is_active` – default=mysql: 0 / postgres: FALSE
+- `actor_role` – default=customer, enum
 - `is_locked` – default=mysql: 0 / postgres: FALSE
+- `is_active` – default=mysql: 0 / postgres: FALSE
+- `updated_at` – default=CURRENT_TIMESTAMP(6)
 
 ## Schema Files
 | File | Engine |
