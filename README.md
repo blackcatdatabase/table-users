@@ -160,11 +160,11 @@ graph LR
 _No engine differences detected._
 
 ## Constraints Snapshot
-- `created_at` – default=CURRENT_TIMESTAMP(6)
 - `actor_role` – default=customer, enum
-- `is_locked` – default=mysql: 0 / postgres: FALSE
+- `created_at` – default=CURRENT_TIMESTAMP(6)
+- `failed_logins` – default=0
 - `is_active` – default=mysql: 0 / postgres: FALSE
-- `updated_at` – default=CURRENT_TIMESTAMP(6)
+- `is_locked` – default=mysql: 0 / postgres: FALSE
 
 ## Schema Files
 | File | Engine |
