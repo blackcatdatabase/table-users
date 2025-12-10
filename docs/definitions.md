@@ -12,12 +12,12 @@ User accounts and authentication attributes.
 | email_hash_key_version | VARCHAR(64) | YES |  | Key version for email_hash. |
 | failed_logins | mysql: INT / postgres: INTEGER | NO | 0 | Failed login counter. |
 | id | BIGINT | NO |  | Surrogate primary key. |
-| is_active | BOOLEAN | NO | FALSE | Account enabled flag. |
-| is_locked | BOOLEAN | NO | FALSE | Lock flag (manual/automatic). |
+| is_active | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Account enabled flag. |
+| is_locked | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Lock flag (manual/automatic). |
 | last_login_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | YES |  | Last successful login (UTC). |
 | last_login_ip_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed last login IP. |
 | last_login_ip_key_version | VARCHAR(64) | YES |  | Key version for last_login_ip_hash. |
-| must_change_password | BOOLEAN | NO | FALSE | Force password change at next login. |
+| must_change_password | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Force password change at next login. |
 | password_algo | VARCHAR(64) | YES |  | Password hash algorithm id. |
 | password_hash | VARCHAR(255) | NO |  | Password hash string. |
 | password_key_version | VARCHAR(64) | YES |  | Key/pepper version for passwords. |
@@ -62,5 +62,5 @@ Indexes:
 ## Views
 | View | Engine | Flags | File |
 | --- | --- | --- | --- |
-| vw_users | mysql | algorithm=MERGE, security=INVOKER | [schema\040_views.mysql.sql](schema\040_views.mysql.sql) |
-| vw_users | postgres |  | [schema\040_views.postgres.sql](schema\040_views.postgres.sql) |
+| vw_users | mysql | algorithm=MERGE, security=INVOKER | [../schema/040_views.mysql.sql](../schema/040_views.mysql.sql) |
+| vw_users | postgres |  | [../schema/040_views.postgres.sql](../schema/040_views.postgres.sql) |
