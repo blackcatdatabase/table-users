@@ -1,19 +1,19 @@
 # 📦 Users
 
-> Auto-generated from [schema-map-postgres.yaml](https://github.com/blackcatacademy/blackcat-database/blob/main/scripts/schema/schema-map-postgres.yaml) (map@sha1:5221bb5c65d0fbe010594635f9efb6fc13c307b2). Do not edit manually.
+> Auto-generated from [schema-map-postgres.yaml](https://github.com/blackcatacademy/blackcat-database/blob/main/scripts/schema/schema-map-postgres.yaml) (map@sha1:b652427bb7925a0767501463b726cc7a44fd195c). Do not edit manually.
 > Targets: PHP 8.3; MySQL 8.x / MariaDB 10.4; Postgres 15+.
 
 ![PHP](https://img.shields.io/badge/PHP-8.3-blueviolet) ![DB](https://img.shields.io/badge/DB-MySQL%20%7C%20MariaDB%20%7C%20Postgres-informational) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-success)
 
 ![Docs](https://img.shields.io/badge/Docs-ready-success) ![Changelog](https://img.shields.io/badge/Changelog-ok-success) ![Changelog%20freshness](https://img.shields.io/badge/Changelog%20freshness-fresh-success) ![Seeds](https://img.shields.io/badge/Seeds-missing-critical) ![Views](https://img.shields.io/badge/Views-ok-success) ![Lineage](https://img.shields.io/badge/Lineage-linked-success) ![Drift](https://img.shields.io/badge/Drift-clean-success) ![Index%20coverage](https://img.shields.io/badge/Index%20coverage-ready-success) ![PII](https://img.shields.io/badge/PII-review-critical)
 
-> 🔥 Lineage hotspot: 32 FK links detected. Make sure cascades/nullability are intentional.
+> 🔥 Lineage hotspot: 35 FK links detected. Make sure cascades/nullability are intentional.
 
 ✅ No engine drift detected
 
 > **Schema snapshot**
 > Map: [schema-map-postgres.yaml](https://github.com/blackcatacademy/blackcat-database/blob/main/scripts/schema/schema-map-postgres.yaml) · Docs: [docs/definitions.md](docs/definitions.md) · Drift warnings: 0
-> Lineage: 0 outbound / 32 inbound · ✅ No engine drift detected · Index coverage: ready · PII flags: 8 · Changelog: fresh
+> Lineage: 0 outbound / 35 inbound · ✅ No engine drift detected · Index coverage: ready · PII flags: 8 · Changelog: fresh
 
 ## Quick Links
 | What | Link | Notes |
@@ -50,7 +50,7 @@
 | Foreign keys | **0** |
 | Unique keys | **3** |
 | Outbound links (FK targets) | **0** |
-| Inbound links (tables depending on this) | **32** |
+| Inbound links (tables depending on this) | **35** |
 | Views | **4** |
 | Seeds | **0** |
 | Drift warnings | **0** |
@@ -66,7 +66,7 @@
 | Docs | **present** |
 | Changelog | **present** |
 | Changelog freshness | fresh (threshold 45 d) |
-| Lineage | outbound **0** / inbound **32** |
+| Lineage | outbound **0** / inbound **35** |
 | Index coverage | **ready** |
 | Engine targets | PHP 8.3; MySQL/MariaDB/Postgres |
 
@@ -94,9 +94,11 @@ graph LR
   key_events["key_events"]:::inbound -->|FK| users
   key_rotation_jobs["key_rotation_jobs"]:::inbound -->|FK| users
   login_attempts["login_attempts"]:::inbound -->|FK| users
+  magic_links["magic_links"]:::inbound -->|FK| users
   newsletter_subscribers["newsletter_subscribers"]:::inbound -->|FK| users
   notifications["notifications"]:::inbound -->|FK| users
   orders["orders"]:::inbound -->|FK| users
+  password_resets["password_resets"]:::inbound -->|FK| users
   pq_migration_jobs["pq_migration_jobs"]:::inbound -->|FK| users
   privacy_requests["privacy_requests"]:::inbound -->|FK| users
   rbac_user_permissions["rbac_user_permissions"]:::inbound -->|FK| users
@@ -112,6 +114,7 @@ graph LR
   user_identities["user_identities"]:::inbound -->|FK| users
   user_profiles["user_profiles"]:::inbound -->|FK| users
   verify_events["verify_events"]:::inbound -->|FK| users
+  webauthn_credentials["webauthn_credentials"]:::inbound -->|FK| users
   linkStyle 0 stroke:#ff6b6b,stroke-width:3px,opacity:0.92;
   linkStyle 1 stroke:#64dfdf,stroke-width:3px,opacity:0.92;
   linkStyle 2 stroke:#a855f7,stroke-width:3px,opacity:0.92;
@@ -144,10 +147,13 @@ graph LR
   linkStyle 29 stroke:#4ade80,stroke-width:3px,opacity:0.92;
   linkStyle 30 stroke:#ff6b6b,stroke-width:3px,opacity:0.92;
   linkStyle 31 stroke:#64dfdf,stroke-width:3px,opacity:0.92;
+  linkStyle 32 stroke:#a855f7,stroke-width:3px,opacity:0.92;
+  linkStyle 33 stroke:#ffd166,stroke-width:3px,opacity:0.92;
+  linkStyle 34 stroke:#4ade80,stroke-width:3px,opacity:0.92;
 ```
 
 - Outbound (depends on): _none_
-- Inbound (relies on this): "api_keys", "app_settings", "audit_log", "auth_events", "carts", "coupon_redemptions", "crypto_keys", "deletion_jobs", "device_fingerprints", "email_verifications", "jwt_tokens", "key_events", "key_rotation_jobs", "login_attempts", "newsletter_subscribers", "notifications", "orders", "pq_migration_jobs", "privacy_requests", "rbac_user_permissions", "rbac_user_roles", "register_events", "reviews", "session_audit", "sessions", "signing_keys", "system_errors", "two_factor", "user_consents", "user_identities", "user_profiles", "verify_events"
+- Inbound (relies on this): "api_keys", "app_settings", "audit_log", "auth_events", "carts", "coupon_redemptions", "crypto_keys", "deletion_jobs", "device_fingerprints", "email_verifications", "jwt_tokens", "key_events", "key_rotation_jobs", "login_attempts", "magic_links", "newsletter_subscribers", "notifications", "orders", "password_resets", "pq_migration_jobs", "privacy_requests", "rbac_user_permissions", "rbac_user_roles", "register_events", "reviews", "session_audit", "sessions", "signing_keys", "system_errors", "two_factor", "user_consents", "user_identities", "user_profiles", "verify_events", "webauthn_credentials"
 - Legend: central node = this table, teal/purple arrows = outbound FK targets, green arrows = inbound FK sources.
 
 ## Engine Matrix
