@@ -1,15 +1,18 @@
--- Auto-generated from schema-views-postgres.yaml (map@sha1:EDC13878AE5F346E7EAD2CF0A484FEB7E68F6CDD)
+-- Auto-generated from schema-views-postgres.yaml (map@sha1:A35B3CB52780A1043442511D947A51BA2C27622C)
 -- engine: postgres
 -- table:  users
 
 -- Contract view for [users]
--- Hides password_* columns. Adds hex helpers.
+-- Adds hex helpers. Includes password_* for auth flows (do not expose externally).
 CREATE OR REPLACE VIEW vw_users AS
 SELECT
   id,
   email_hash,
   UPPER(encode(email_hash,'hex')) AS email_hash_hex,
   email_hash_key_version,
+  password_hash,
+  password_algo,
+  password_key_version,
   is_active,
   is_locked,
   failed_logins,

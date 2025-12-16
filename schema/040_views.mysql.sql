@@ -1,15 +1,18 @@
--- Auto-generated from schema-views-mysql.yaml (map@sha1:A4E10261DACB7519F6FEA44ED77A92163429CA5E)
+-- Auto-generated from schema-views-mysql.yaml (map@sha1:FFA9A9D6FA9EE079B0DAEBB6FEE023C138E8FFA1)
 -- engine: mysql
 -- table:  users
 
 -- Contract view for [users]
--- Hides password_* columns. Adds HEX helpers for hashes.
+-- Adds HEX helpers for hashes. Includes password_* for auth flows (do not expose externally).
 CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_users AS
 SELECT
   id,
   email_hash,
   CAST(LPAD(HEX(email_hash), 64, '0') AS CHAR(64)) AS email_hash_hex,
   email_hash_key_version,
+  password_hash,
+  password_algo,
+  password_key_version,
   is_active,
   is_locked,
   failed_logins,
