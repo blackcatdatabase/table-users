@@ -252,6 +252,7 @@ use OrderByTools, PkTools, RepositoryHelpers;
           ));
           if (!$rows) { return 0; }
 
+          /** @var list<string> $updCols */
           $updCols = [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_hash', 'last_login_ip_key_version', 'actor_role', 'deleted_at' ];
           if ($updCols && $soft && !in_array($soft, $updCols, true)) { $updCols[] = $soft; }
 
