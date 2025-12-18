@@ -1,0 +1,68 @@
+{
+  "tables": {
+    "users": {
+      "columns": {
+        "actor_role": {
+          "strategy": "passthrough"
+        },
+        "created_at": {
+          "strategy": "passthrough"
+        },
+        "deleted_at": {
+          "strategy": "passthrough"
+        },
+        "email_hash": {
+          "context": "db.hmac.users.email_hash",
+          "key_version_column": "email_hash_key_version",
+          "strategy": "hmac",
+          "write_key_version": true
+        },
+        "email_hash_key_version": {
+          "strategy": "passthrough"
+        },
+        "failed_logins": {
+          "strategy": "passthrough"
+        },
+        "id": {
+          "strategy": "passthrough"
+        },
+        "is_active": {
+          "strategy": "passthrough"
+        },
+        "is_locked": {
+          "strategy": "passthrough"
+        },
+        "last_login_at": {
+          "strategy": "passthrough"
+        },
+        "last_login_ip_hash": {
+          "context": "db.hmac.users.last_login_ip_hash",
+          "key_version_column": "last_login_ip_key_version",
+          "strategy": "hmac",
+          "write_key_version": true
+        },
+        "last_login_ip_key_version": {
+          "strategy": "passthrough"
+        },
+        "must_change_password": {
+          "strategy": "passthrough"
+        },
+        "password_algo": {
+          "strategy": "passthrough"
+        },
+        "password_hash": {
+          "strategy": "passthrough"
+        },
+        "password_key_version": {
+          "strategy": "passthrough"
+        },
+        "updated_at": {
+          "strategy": "passthrough"
+        },
+        "version": {
+          "strategy": "passthrough"
+        }
+      }
+    }
+  }
+}
