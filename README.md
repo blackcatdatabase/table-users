@@ -1,6 +1,6 @@
 # 📦 Users
 
-> Auto-generated from [schema-map-postgres.yaml](https://github.com/blackcatacademy/blackcat-database/blob/main/scripts/schema/schema-map-postgres.yaml) (map@sha1:9f30f03eb2ba280e22d2319d26d21b39683a872a). Do not edit manually.
+> Auto-generated from [schema-map-postgres.yaml](https://github.com/blackcatacademy/blackcat-database/blob/main/scripts/schema/schema-map-postgres.yaml) (map@sha1:260cf51de6e2c742030665b35b370cdae36de2c6). Do not edit manually.
 > Targets: PHP 8.3; MySQL 8.x / MariaDB 10.4; Postgres 15+.
 
 ![PHP](https://img.shields.io/badge/PHP-8.3-blueviolet) ![DB](https://img.shields.io/badge/DB-MySQL%20%7C%20MariaDB%20%7C%20Postgres-informational) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-success)
@@ -45,7 +45,7 @@
 ## At a Glance
 | Metric | Count |
 | --- | --- |
-| Columns | **19** |
+| Columns | **20** |
 | Indexes | **7** |
 | Foreign keys | **0** |
 | Unique keys | **3** |
@@ -60,7 +60,7 @@
 | Item | Value |
 | --- | --- |
 | Table | users |
-| Schema files | **8** |
+| Schema files | **9** |
 | Views | **4** |
 | Seeds | **0** |
 | Docs | **present** |
@@ -172,6 +172,7 @@ _No engine differences detected._
 - `must_change_password` – default=mysql: 0 / postgres: FALSE
 - `created_at` – default=CURRENT_TIMESTAMP(6)
 - `updated_at` – default=CURRENT_TIMESTAMP(6)
+- `version` – default=0
 - `actor_role` – default=customer, enum
 
 ## Schema Files
@@ -183,6 +184,7 @@ _No engine differences detected._
 | [020_indexes.postgres.sql](schema/020_indexes.postgres.sql) | postgres |
 | [040_views.mysql.sql](schema/040_views.mysql.sql) | mysql |
 | [040_views.postgres.sql](schema/040_views.postgres.sql) | postgres |
+| [encryption-map.json](schema/encryption-map.json) |  |
 | [040_views_modules.mysql.sql](schema/modules/blackcat-auth/040_views_modules.mysql.sql) | mysql |
 | [040_views_modules.postgres.sql](schema/modules/blackcat-auth/040_views_modules.postgres.sql) | postgres |
 
