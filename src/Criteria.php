@@ -41,11 +41,11 @@ final class Criteria extends BaseCriteria
         return [ 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'last_login_ip_key_version' ];
     }
 
-/** Columns allowed in ORDER BY (falls back to filterable() when empty). */
-protected function sortable(): array
-{
-    return [ 'id', 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_key_version', 'created_at', 'updated_at', 'version', 'deleted_at', 'actor_role' ];
-}
+    /** Columns allowed in ORDER BY (falls back to filterable() when empty). */
+    protected function sortable(): array
+    {
+        return [ 'id', 'email_hash_key_version', 'password_hash', 'password_algo', 'password_key_version', 'is_active', 'is_locked', 'failed_logins', 'must_change_password', 'last_login_at', 'last_login_ip_key_version', 'created_at', 'updated_at', 'version', 'deleted_at', 'actor_role' ];
+    }
 
     /**
      * Whitelist of joinable entities (for safe ->join() usage):

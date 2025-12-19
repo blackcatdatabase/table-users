@@ -40,6 +40,9 @@ SELECT
   email_hash,
   CAST(LPAD(HEX(email_hash), 64, '0') AS CHAR(64)) AS email_hash_hex,
   email_hash_key_version,
+  password_hash,
+  password_algo,
+  password_key_version,
   is_active,
   is_locked,
   failed_logins,
@@ -63,6 +66,9 @@ SELECT
   email_hash,
   UPPER(encode(email_hash,'hex')) AS email_hash_hex,
   email_hash_key_version,
+  password_hash,
+  password_algo,
+  password_key_version,
   is_active,
   is_locked,
   failed_logins,
@@ -113,7 +119,7 @@ SQL;
         $hasTable = SchemaIntrospector::hasTable($db, $d, $table);
         $hasView  = SchemaIntrospector::hasView($db, $d, $view);
 
-        // Quick index/FK check â€“ generator injects names (case-sensitive per DB)
+        // Quick index/FK check - generator injects names (case-sensitive per DB)
         $expectedIdx = [ 'idx_users_actor_role', 'idx_users_is_active', 'idx_users_last_login_at', 'idx_users_last_login_ip_hash' ];
         if ($d->isMysql()) {
             // Drop PG-only index naming patterns (e.g., GIN/GiST)
